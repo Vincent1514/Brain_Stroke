@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 # Load the trained models
 # lr_model = load('logreg_model.joblib')
 rf_model = load('rf_model.joblib')
-# svm_model = load('svm_model.joblib')
+svm_model = load('svm_model.joblib')
 scaler = load('scaler.pkl') 
 # scaler = MinMaxScaler()
 
@@ -107,12 +107,14 @@ def prediction_page():
 
             # Predict using the Random Forest model
             rf_prediction = rf_model.predict(input_df_scaled)[0]
+            svm_prediction = svm_model.predict(input_df_scaled)[0]
 
             # st.write("input_df_scaled")
             # st.write(input_df_scaled)
             
             # Display the prediction result
             st.success(f'🌟 Random Forest Prediction: {"At risk of stroke" if rf_prediction == 1 else "Not at risk"}')
+            st.success(f'🌟 SVM Prediction: {"At risk of stroke" if svm_prediction == 1 else "Not at risk"}')
         else:
             st.error("⚠️ Scaler not loaded properly. Please check the scaler file.")
 
